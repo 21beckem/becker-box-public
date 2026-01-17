@@ -19,8 +19,13 @@ body {
 #close {
     position: absolute;
     top: 2rem;
-    right: 2rem;
+    left: 2rem;
     z-index: 1500;
+}
+#open-games-dir {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
 }
 center-on-page {
     display: block;
@@ -127,11 +132,12 @@ center-on-page {
 }
     </style>
     <link rel="stylesheet" href="pointer.css">
-	<link rel="stylesheet" href="../fontawesome/all.min.css">
+	<link rel="stylesheet" href="../../fontawesome/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/peerjs@1.3.2/dist/peerjs.min.js"></script>
 </head>
 <body>
     <button id="close" class="wiiBtn" onclick="window.close()">Close</button>
+    <button id="open-games-dir" class="wiiBtn" onclick="window.electron.openGamesFolder()">Open Games Folder</button>
     <center>
         <h1 id="title">BeckerBox</h1>
         <h2 style="margin: 0; color: gray">Time to connect your Remotes</h2>
