@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="mobile-web-app-capable" content="yes">
+	<link rel="manifest" href="manifest.webmanifest">
+	<meta name="theme-color" content="#eaeaea" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<link rel="icon" type="image/png" href="img/logo.png">
+
+	<link href='https://fonts.googleapis.com/css?family=ADLaM Display' rel='stylesheet'>
+	<title>BeckerBox Remote</title>
+	<link rel="stylesheet" href="../fontawesome/all.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/lib/nosleep.min.js"></script>
+	<script src="js/lib/nipplejs.min.js"></script>
+	<script src="https://beckersuite.com/assets/js/jsalert.js"></script>
+    <script src="js/qr/qrcode.min.js"></script>
+    <script src="js/qr/qr-scanner.umd.min.js"></script>
+	<link rel="stylesheet" href="css/selectSwiper.css">
+</head>
+
+<body>
+	<section id="openFullScreenPrompt">
+		<button id="launchFullscreenBtn" class="wiiUIbtn">Launch</button>
+		<center>Fullscreen is required for this BeckerBox remote to fully function as expected.<br>Press 'Launch' to start!</center>
+	</section>
+	<section id="scanPopup" style="display: none;">
+		<span class="loader centered"></span>
+		<video id="qrScannerPreview"></video>
+		<div class="fader" style="top:   0; height: 100px;"></div>
+		<div class="fader" style="bottom:0; height: 200px;"></div>
+		<div class="back-btn" onclick="window.GeneralGUI.showScanPopup(false)"><i class="fa-solid fa-chevron-left"></i> Back</div>
+	</section>
+	<section id="connectPage">
+		<center>
+			<h1 style="font-size: 45px; margin-top: 50px; margin-bottom: 10px;">BeckerBox<br>Remote</h1>
+			<p id="connectingText" style="margin-top: 40px; font-size: 20px;">Connecting to BeckerBox host<br><br>Please wait...</p>
+			<div style="height: 50px;"></div>
+		</center>
+	</section>
+	<section id="RemotePage" style="display: none;">
+		<div id="side-menu" class="closed">
+			<div class="screen-dimmer" onclick="this.parentElement.classList.add('closed')"></div>
+			<div class="menu-content">
+				<div class="menu-btn player-one-only" id="PowerOffBtn" style="transform: translateY(-1rem);"><i class="fa-solid fa-power-off" style="color: red;"></i> Power Off</div>
+				<div class="title">BeckerBox<br>Remote</div>
+				<hr>
+				<div class="menu-btn" onclick="window.refreshConnection(null, true)">Reconnect</div>
+				<div class="menu-btn player-one-only" id="changeDiscBtn">Change Disc</div>
+				<div class="menu-btn" id="changeLayoutBtn"></div>
+				<div class="menu-btn" id="handDominanceBtn"></div>
+				<div id="joinCode">
+					<div class="text">Join Code</div>
+					<div class="qr-code"></div>
+				</div>
+			</div>
+		</div>
+		<div class="top-nav">
+			<div id="menuBarsBtn"><i class="fa-solid fa-sliders" style="opacity: 0.5;"></i></div>
+			<div id="calibrateBtn" style="display: none;"><i class="fa-solid fa-crosshairs"></i></div>
+		</div>
+		<!-- Nunchuck insert/remove -->
+		<div data-key="Nun" class="btn" data-dispatches-events="true" style="display: none;"></div>
+
+
+		<link rel="stylesheet" href="css/layout-1.css">
+		<remote class="layout-1">
+			<div class="bTri one">
+				<div data-key="B" class="btn" id="bBtn1"></div>
+				<div class="text">B</div>
+			</div>
+			<div class="bTri two">
+				<div data-key="B" class="btn" id="bBtn2"></div>
+				<div class="text">B</div>
+			</div>
+	
+			<div class="dpad">
+				<div></div>
+				<div data-key="PadN" class="btn"><i class="fa-solid fa-caret-up"></i></div>
+				<div></div>
+				<div data-key="PadW" class="btn"><i class="fa-solid fa-caret-left"></i></div>
+				<div class="ctr"></div>
+				<div data-key="PadE" class="btn"><i class="fa-solid fa-caret-right"></i></div>
+				<div></div>
+				<div data-key="PadS" class="btn"><i class="fa-solid fa-caret-down"></i></div>
+				<div></div>
+			</div>
+	
+			<div data-key="A" class="btn">A</div>
+	
+			<div class="homeRow">
+				<div data-key="Minus" class="btn"><i class="fa-solid fa-minus"></i></div>
+				<div data-key="Home" class="btn"><i style="pointer-events: none; color:rgb(0,96,185)" class="fa-solid fa-house"></i></div>
+				<div data-key="Plus" class="btn"><i class="fa-solid fa-plus"></i></div>
+			</div>
+	
+			<div class="numBtns">
+				<div data-key="One" class="btn">1</div>
+				<div data-key="Two" class="btn">2</div>
+			</div>
+		</remote>
+
+		
+		<link rel="stylesheet" href="css/layout-2.css">
+		<remote class="layout-2">
+			<div class="bTri one">
+				<div data-key="B" class="btn" id="bBtn1"></div>
+				<div class="text">B</div>
+			</div>
+			<div class="bTri two">
+				<div data-key="B" class="btn" id="bBtn2"></div>
+				<div class="text">B</div>
+			</div>
+
+			<div class="dpad">
+				<div></div>
+				<div data-key="PadN" class="btn"><i class="fa-solid fa-caret-up"></i></div>
+				<div></div>
+				<div data-key="PadW" class="btn"><i class="fa-solid fa-caret-left"></i></div>
+				<div class="ctr"></div>
+				<div data-key="PadE" class="btn"><i class="fa-solid fa-caret-right"></i></div>
+				<div></div>
+				<div data-key="PadS" class="btn"><i class="fa-solid fa-caret-down"></i></div>
+				<div></div>
+			</div>
+	
+			<div data-key="A" class="btn">A</div>
+	
+			<div class="homeRow">
+				<div data-key="Minus" class="btn"><i class="fa-solid fa-minus"></i></div>
+				<div data-key="Home" class="btn"><i style="pointer-events: none; color:rgb(0,96,185)" class="fa-solid fa-house"></i></div>
+				<div data-key="Plus" class="btn"><i class="fa-solid fa-plus"></i></div>
+			</div>
+	
+			<div class="numBtns">
+				<div data-key="One" class="btn">1</div>
+				<div data-key="Two" class="btn">2</div>
+			</div>
+			<script src="js/layout-2.js"></script>
+		</remote>
+		
+
+		<link rel="stylesheet" href="css/layout-3.css">
+		<remote class="layout-3">
+			<div class="remote-container nunchuck">
+				<div class="label">Extension</div>
+				<div class="column">
+					<div data-key="C" class="btn">C</div>
+					<div data-key="Z" class="btn">Z</div>
+				</div>
+				<div class="column">
+					<div class="joystick"></div>
+					<div data-key="NunX" class="btn" data-dispatches-events="true" style="display: none;"></div>
+					<div data-key="NunY" class="btn" data-dispatches-events="true" style="display: none;"></div>
+				</div>
+			</div>
+			<div class="homeRow">
+				<div data-key="Minus" class="btn"><i class="fa-solid fa-minus"></i></div>
+				<div data-key="Home" class="btn"><i style="pointer-events: none; color:rgb(0,96,185)" class="fa-solid fa-house"></i></div>
+				<div data-key="Plus" class="btn"><i class="fa-solid fa-plus"></i></div>
+			</div>
+			<div class="remote-container wiiMote">
+				<div class="label">Controller</div>
+				<div class="column">
+					<div class="numBtns">
+						<div data-key="One" class="btn">1</div>
+						<div data-key="Two" class="btn">2</div>
+					</div>
+					<div data-key="B" class="btn">B</div>
+				</div>
+				<div class="column">
+					<div class="dpad">
+						<div></div>
+						<div data-key="PadN" class="btn"><i class="fa-solid fa-caret-up"></i></div>
+						<div></div>
+						<div data-key="PadW" class="btn"><i class="fa-solid fa-caret-left"></i></div>
+						<div class="ctr"></div>
+						<div data-key="PadE" class="btn"><i class="fa-solid fa-caret-right"></i></div>
+						<div></div>
+						<div data-key="PadS" class="btn"><i class="fa-solid fa-caret-down"></i></div>
+						<div></div>
+					</div>
+					<div data-key="A" class="btn">A</div>
+				</div>
+			</div>
+
+			<script src="js/layout-3.js"></script>
+		</remote>
+
+
+		<div id="lights">
+			<div id="light1"></div>
+			<div id="light2"></div>
+			<div id="light3"></div>
+			<div id="light4"></div>
+		</div>
+
+	</section>
+
+	<script src="js/app.js" type="module"></script>
+	<script src="js/selectSwiper.js" select-button="true"></script>
+</body>
+
+</html>

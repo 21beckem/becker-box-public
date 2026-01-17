@@ -1,0 +1,136 @@
+remote.layout-2 {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: space-evenly;
+	flex: 1;
+	margin-bottom: 20px;
+
+	.bTri .btn {
+		position: fixed;
+		top: var(--bBtn-top);
+		width: var(--bBtn-size);
+		height: var(--bBtn-size);
+		border-radius: 20px;
+		transform: rotate(45deg);
+		font-size: 32px;
+		z-index: 1;
+	}
+	.bTri.one .btn {
+		left: calc(var(--bBtn-size) / -2)
+	}
+	.bTri.two .btn {
+		right: calc(var(--bBtn-size) / -2)
+	}
+	.bTri.one .text {
+		left: 30px
+	}
+	.bTri.two .text {
+		right: 30px
+	}
+	.bTri .text {
+		position: fixed;
+		top: calc(var(--bBtn-top) + 60px);
+		font-size: 32px;
+		z-index: 1;
+		pointer-events: none;
+	}
+	
+	.dpad {
+		margin-top: 35px;
+		display: flex;
+		flex-wrap: wrap;
+		width: 150px;
+		aspect-ratio: 1;
+		filter: drop-shadow(0px 0px 4px gray);
+	}
+	.dpad .nipple, .dpad .nipple * {
+		filter: none !important;
+	}
+	.dpad div {
+		flex: 0 0 33.3333%;
+		border: none;
+		font-size: 25px;
+		font-weight: bold;
+		margin: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		filter: none !important;
+		z-index: -1;
+		pointer-events: none;
+	}
+	.dpad div.btn[data-key="PadN"] {
+		border-radius: var(--dpad-radius) var(--dpad-radius) 0 0;
+	}
+	.dpad div.btn[data-key="PadW"] {
+		border-radius: var(--dpad-radius) 0 0 var(--dpad-radius);
+	}
+	.dpad div.btn[data-key="PadE"] {
+		border-radius: 0 var(--dpad-radius) var(--dpad-radius) 0;
+	}
+	.dpad div.btn[data-key="PadS"] {
+		border-radius: 0 0 var(--dpad-radius) var(--dpad-radius);
+	}
+	div.btn, .dpad div.ctr {
+		background: #dadada;
+		filter: drop-shadow(0px 0px 4px gray);
+	}
+	div.btn.pressed {
+		background: #acacac;
+	}
+	
+	[data-key="A"] {
+		margin-top: 30px;
+		width: 150px;
+		aspect-ratio: 1;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 30px;
+	}
+	
+	.homeRow {
+		margin-top: 20px;
+		width: 200px;
+		display: flex;
+		justify-content: space-between;
+	}
+	.homeRow div {
+		width: 30px;
+		aspect-ratio: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+	}
+	.homeRow div:not([data-key="Home"]) {
+		font-size: 0.9em;
+		border-radius: 10px;
+		transform: scale(1.1);
+	}
+	
+	.homeRow div[data-key="Home"] svg {
+		transform: scale(0.7);
+	}
+	
+	.numBtns {
+		margin-top: 40px;
+		width: 100%;
+		height: 160px;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 20px;
+	}
+	.numBtns div {
+		flex: 1;
+		width: 100%;
+		border-radius: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}
