@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeckerBox</title>
+    <script src="qrcode.min.js"></script>
+    <style>
+@font-face {
+    font-family: 'Wii';
+    src: url('fonts/wii.ttf') format('truetype');
+}
+i {
+    pointer-events: none;
+}
+body {
+    font-family: 'Wii', sans-serif;
+}
+#close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    z-index: 1500;
+}
+center-on-page {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#title {
+    font-family: 'Wii', sans-serif;
+    font-size: 6rem;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0px 0px 10px #000;
+    margin: 0;
+    margin-top: 5rem;
+}
+.blueBorder {
+    font-family: 'Wii', sans-serif, monospace;
+    border: 5px solid #54b9de;
+    border-radius: 10px;
+    padding: 10px;
+    width: fit-content;
+    color: #323232;
+    background-color: #e0e5ea;
+    box-shadow: 2px 2px 18px 13px white inset;
+}
+.wiiBtn {
+    font-family: 'Wii', sans-serif;
+    font-size: 30px;
+    letter-spacing: 1px;
+    color: #323232;
+    padding: 0.5rem 2rem;
+    min-width: 170px;
+    border-radius: 30px;
+    border: solid #53bee6;
+    background-color: #e0e5ea;
+    box-shadow: 2px 2px 12px 7px white inset;
+    filter: drop-shadow(0px 0px 1px #53bee6);
+}
+.wiiBtn, button {
+    transition: transform 0.15s;
+}
+.wiiBtn:not(.no-cursor), button:not(.no-cursor) {
+    cursor: pointer;
+}
+.wiiBtn.hover, .wiiBtn:not(.no-cursor):hover, button.hover, button:not(.no-cursor):hover {
+    transform: scale(1.1);
+}
+#qrcode {
+    width: 200px;
+    height: 200px;
+    position: relative;
+}
+#qrcode canvas, #qrcode img {
+    position: relative;
+    z-index: 5;
+}
+.loader {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+	top: 50%;
+	left: 50%;
+    border: 5px solid rgba(255, 255, 255, 0.5);
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    transform: translate(-50%, -50%);
+    animation: loader-rotation-centered 1s linear infinite;
+}
+@keyframes loader-rotation-centered {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+
+#loginOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 900;
+    opacity: 1;
+    pointer-events: all;
+    transition: opacity 0.2s ease;
+}
+#loginOverlay.loggedIn {
+    opacity: 0;
+    pointer-events: none;
+}
+#loginOverlay.no-access .loading-page {
+    display: none;
+}
+#loginOverlay:not(.no-access) .no-access-page {
+    display: none;
+}
+    </style>
+    <link rel="stylesheet" href="pointer.css">
+	<link rel="stylesheet" href="../fontawesome/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/peerjs@1.3.2/dist/peerjs.min.js"></script>
+</head>
+<body>
+    <button id="close" class="wiiBtn" onclick="window.close()">Close</button>
+    <center>
+        <h1 id="title">BeckerBox</h1>
+        <h2 style="margin: 0; color: gray">Time to connect your Remotes</h2>
+    </center>
+    <center-on-page>
+        <center>
+            <h3>Scan this with your phone:</h3>
+            <div id="qrcode" class="blueBorder">
+                <div class="loader"></div>
+            </div>
+            <br><br>
+            <button class="wiiBtn no-cursor" onclick="window.startWii(this)">Start</button>
+        </center>
+    </center-on-page>
+
+    <div id="loginOverlay">
+        <center-on-page class="loading-page">
+            <center>
+                <h1>Verifying your access...</h1>
+            </center>
+        </center-on-page>
+        <center-on-page class="no-access-page">
+            <center>
+                <h1 style="font-size: 3rem;">Oh no! It looks like you don't have access to BeckerBox</h1>
+                <br>
+                <p style="font-size: 1.5rem; font-family: serif;">If you would like to purchase BeckerBox, please visit <a href="https://beckersuite.com/purchase/?uid=becker-box" target="_blank">beckersuite.com</a>. You'll be prompted to login/create an account, then you can purchase and/or request access to BeckerBox.</p>
+            </center>
+        </center-on-page>
+    </div>
+
+    <script src="app.js" type="module"></script>
+</body>
+</html>
