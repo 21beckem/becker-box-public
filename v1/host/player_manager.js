@@ -9,8 +9,9 @@ const PlayerManager = new (class PlayerManager {
         this.pointerClicks = [false, false, false, false];
     }
     #setQrCode(id, selector='#qrcode') {
+        
         new QRCode(document.querySelector(selector), {
-            text: 'https://21beckem.github.io/becker-box-mrk-2/web/remote/?id=' + id,
+            text: new URL('../?id='+id, location.href).href,
             width: 200,
             height: 200,
             colorDark : "#000000",
