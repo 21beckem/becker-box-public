@@ -48,7 +48,8 @@ const PACKET = {
 	Z: 0,
 	NunX: 128,
 	NunY: 128
-}
+};
+const iPhoneAdjustment = navigator.userAgent.toLowerCase().includes('iphone') ? -1 : 1;
 
 class Remote {
 	searchParams = new URLSearchParams(window.location.search);
@@ -146,9 +147,9 @@ class Remote {
 	}
 	#handleMotion(e) {
 		// Accelerometer
-		PACKET.AccelerometerX = e.accelerationIncludingGravity.x;
-		PACKET.AccelerometerY = e.accelerationIncludingGravity.y;
-		PACKET.AccelerometerZ = e.accelerationIncludingGravity.z;
+		PACKET.AccelerometerX = e.accelerationIncludingGravity.x * iPhoneAdjustment;
+		PACKET.AccelerometerY = e.accelerationIncludingGravity.y * iPhoneAdjustment;
+		PACKET.AccelerometerZ = e.accelerationIncludingGravity.z * iPhoneAdjustment;
 
 		// Gyroscope
 		PACKET.Gyroscope_Yaw = e.rotationRate.gamma;
@@ -368,6 +369,7 @@ class RemoteGui {
 	#openMenu() { _('side-menu').classList.remove('closed'); }
 	closeMenu() { _('side-menu').classList.add('closed'); }
 }
+
 
 
 
