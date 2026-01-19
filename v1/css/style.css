@@ -13,8 +13,9 @@
 	--light-on-shadow: #48c8ff;
 }
 
-body {
+html, body {
 	touch-action: none;
+	-webkit-touch-callout: none;
 	margin: 0;
 	padding: 0;
 	background: var(--background-color);
