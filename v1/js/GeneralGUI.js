@@ -37,8 +37,8 @@ export default class GeneralGUI {
 			await elem.oRequestFullscreen();
 		}
 		else {
-			JSAlert.alert('Looks like your device doesn\'t support fullscreen!', 'Oh no...', JSAlert.Icons.Failed);
-			JSAlert.alert('The remote is now launching, but please note that some features <b>may not work!</b>', 'We\'ll try without fullscreen', JSAlert.Icons.Warning);
+			// JSAlert.alert('Looks like your device doesn\'t support fullscreen!', 'Oh no...', JSAlert.Icons.Failed);
+			// JSAlert.alert('The remote is now launching, but please note that some features <b>may not work!</b>', 'We\'ll try without fullscreen', JSAlert.Icons.Warning);
 			_('openFullScreenPrompt').style.display = 'none';
 		}
 
