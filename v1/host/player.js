@@ -12,6 +12,11 @@ export default class Player {
         this.pointer = new Pointer(this.slot, parent);
         this.#initConn();
 
+        this.remoteContainer = document.querySelector('remote-container.p'+(slot+1));
+        this.remoteContainer.classList.add('connected');
+        this.remoteContainer.querySelector('.disconnect').innerText = 'Disconnect';
+        this.remoteContainer.querySelector('.disconnect').onclick = () => this.parent.removePlayer(this.slot);
+
         this.#restartDisconnectTimer();
     }
     #initConn() {
@@ -50,6 +55,8 @@ export default class Player {
     }
     remove() {
         this.#disconnect();
+        this.remoteContainer.classList.remove('connected');
+        this.remoteContainer.querySelector('.disconnect').innerText = 'scan now...';
     }
     alertPowerOff() {
         if (this.#alertedAboutPowerOff) return;

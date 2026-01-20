@@ -2,16 +2,14 @@ import { Peer } from 'https://esm.sh/peerjs@1.5.5?bundle-deps';
 import GeneralGUI from './GeneralGUI.js';
 const JSAlert = window.JSAlert;
 const REFRESH = '<button class="wiiUIbtn" onclick="window.refreshConnection();" style="font-size: inherit; border-radius: 17px;">Refresh</button>';
-const SCANAGAIN = '<button class="wiiUIbtn" onclick="window.GeneralGUI.showScanPopup();" style="font-size: inherit; border-radius: 17px;">Scan Again</button>';
-const SCANBEGIN = '<button class="wiiUIbtn" onclick="window.GeneralGUI.showScanPopup();" style="font-size: inherit; border-radius: 17px;">Scan a Code to Join</button>';
 const status = {
-	connecting: `Connecting to BeckerBox host<br><br>Please wait...<br><br>If this takes more than 10 seconds, please ${REFRESH}, or ${SCANAGAIN}`,
+	connecting: `Connecting to BeckerBox host<br><br>Please wait...<br><br>If this takes more than 10 seconds, please ${REFRESH}`,
 	connected: 'Connected!<br><br>Launching remote...',
-	noCodeProvided: `Looks like no game code was provided!<br><br>Please ${SCANAGAIN}`,
-	cantconnect: `Sorry, it looks something went wrong while connecting!<br><br>Please ${SCANAGAIN}, or ${REFRESH}`,
-	disconnected: `Sorry, it looks like you got disconnected!<br><br>Please ${REFRESH}, or ${SCANAGAIN}`,
+	noCodeProvided: `Looks like no game code was provided!<br><br>Please scan the QR code again.`,
+	cantconnect: `Sorry, it looks something went wrong while connecting!<br><br>Please ${REFRESH}`,
+	disconnected: `Sorry, it looks like you got disconnected!<br><br>Please ${REFRESH}`,
 	allSlotsTaken: 'Sorry, it looks like all the player slots have already been taken!',
-	welcome: `Welcome to BeckerBox Remote!<br><br><br>${SCANBEGIN}`,
+	welcome: `Thanks for playing with BeckerBox`,
 	error: (err) => `Oh no! There's been an error.
 		<br>
 		<div style="font-size: small;">
@@ -20,7 +18,7 @@ const status = {
 			<p class="hide">${err}</p>
 		</div>
 		<br>
-		Please ${REFRESH}, or ${SCANAGAIN}`
+		Please ${REFRESH}`
 }
 
 const PACKET = {
@@ -82,7 +80,6 @@ class Remote {
 	}
 	async connectWithCode(code = null) {
 		this.GUI.setConnectingStatus(status.connecting);
-		GeneralGUI.showScanPopup(false);
 		if (code === false) {
 			this.GUI.setConnectingStatus(status.welcome);
 			return;

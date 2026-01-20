@@ -1,6 +1,6 @@
 // if not running in Electron, redirect to home page
 if (!window.electron) {
-    window.location.href = 'https://beckersuite.com';
+    // window.location.href = 'https://beckersuite.com';
 }
 
 import { GoogleSignInWithFirebase } from './firebase.js';
@@ -27,8 +27,6 @@ else {
 window.PlayerManager = PlayerManager;
 
 window.startWii = (startBtn) => {
-    if (PlayerManager.pointerClicks.includes(true)) {
-        window.electron.startWii();
-        startBtn.style.display = 'none';
-    }
+    window.electron.startWii();
+    startBtn.style.display = 'none';
 }

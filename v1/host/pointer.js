@@ -14,6 +14,7 @@ export default class Pointer {
         this.playerManager.pointerClicks[slot] = false;
     }
     clickAtPointer() {
+        return;
         console.log(`click! (${this.slot})`);
         this.playerManager.pointerClicks[this.slot] = true;
         this.hoveredElements[0]?.click();

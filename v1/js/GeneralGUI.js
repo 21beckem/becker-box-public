@@ -1,13 +1,6 @@
 let noSleep = new window.NoSleep();
 const _ = (x) => document.getElementById(x);
 export default class GeneralGUI {
-	static showScanPopup(showHide=true) {
-		_('scanPopup').style.display = showHide ? '' : 'none';
-		if (showHide)
-			qrScanner.start();
-		else
-			qrScanner.stop();
-	}
     static async attemptFullscreen() {
 		// Request motion events permission for iOS 13+ devices
 		if (DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === 'function') {
@@ -46,7 +39,7 @@ export default class GeneralGUI {
 			// lock screen orientation
 			screen.orientation.lock('portrait');
 		} catch (e) {
-			console.error(e);
+			console.warn(e);
 		}
 
 		// ensure the page doesn't destort when going to fullscreen
