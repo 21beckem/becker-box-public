@@ -1,6 +1,6 @@
 // if not running in Electron, redirect to home page
-if (!window.electron) {
-    // window.location.href = 'https://beckersuite.com';
+if (!window.electron && !location.host.startsWith('localhost')) {
+    window.location.href = 'https://beckersuite.com';
 }
 
 import { GoogleSignInWithFirebase } from './firebase.js';

@@ -40,9 +40,9 @@ export default class Pointer {
     }
     moveTo(x, y) {
         this.pos = { x: x, y: y };
-        this.DIV.style.left = `${x}px`;
-        this.DIV.style.top = `${y}px`;
-        this.handleMoveEvents();
+        // this.DIV.style.left = `${x}px`;
+        // this.DIV.style.top = `${y}px`;
+        // this.handleMoveEvents();
     }
     rotateTo(angle) {
         this.DIV.style.transform = `rotate(${angle}deg)`;
@@ -57,13 +57,14 @@ export default class Pointer {
             x: Math.min(Math.max(this.pos.x, 0), document.documentElement.clientWidth),
             y: Math.min(Math.max(this.pos.y, 0), document.documentElement.clientHeight)
         };
-        this.DIV.style.left = `${this.pos.x}px`;
-        this.DIV.style.top = `${this.pos.y}px`;
-        this.handleMoveEvents();
+        // this.DIV.style.left = `${this.pos.x}px`;
+        // this.DIV.style.top = `${this.pos.y}px`;
+        // this.handleMoveEvents();
     }
     get AnalogX() { return (this.pos.x / document.documentElement.clientWidth) * 255; }
     get AnalogY() { return (this.pos.y / document.documentElement.clientHeight) * 255; }
     handleMoveEvents() {
+        return;
         let oldEls = [...this.hoveredElements];
         this.hoveredElements = [];
         document.elementsFromPoint(this.pos.x, this.pos.y).forEach(el => {

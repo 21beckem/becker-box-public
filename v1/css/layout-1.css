@@ -42,7 +42,7 @@ remote.layout-1 {
 		flex-wrap: wrap;
 		width: 150px;
 		aspect-ratio: 1;
-		filter: drop-shadow(0px 0px 4px gray);
+		filter: var(--btn-drop-shadow);
 	}
 	.dpad div {
 		flex: 0 0 33.3333%;
@@ -68,8 +68,8 @@ remote.layout-1 {
 		border-radius: 0 0 var(--dpad-radius) var(--dpad-radius);
 	}
 	div.btn, .dpad div.ctr {
-		background: #dadada;
-		filter: drop-shadow(0px 0px 4px gray);
+		background: var(--btn-background-color);
+		filter: var(--btn-drop-shadow);
 	}
 	div.btn.pressed {
 		background: #acacac;
