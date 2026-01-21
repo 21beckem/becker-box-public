@@ -123,7 +123,7 @@ remote.layout-3 {
 		filter: var(--btn-drop-shadow);
 	}
 	div.btn.pressed {
-		background: #acacac;
+		background: var(--btn-pressed-background-color);
 	}
 	
 	.numBtns {

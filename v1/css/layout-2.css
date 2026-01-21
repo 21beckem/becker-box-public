@@ -77,7 +77,7 @@ remote.layout-2 {
 		filter: var(--btn-drop-shadow);
 	}
 	div.btn.pressed {
-		background: #acacac;
+		background: var(--btn-pressed-background-color);
 	}
 	
 	[data-key="A"] {

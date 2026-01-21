@@ -9,6 +9,7 @@
 	--container-border: #cfcfcf;
 	--btn-background-color: #dadada;
 	--btn-drop-shadow: drop-shadow(0px 0px 4px gray);
+	--btn-pressed-background-color: #acacac;
 	--text-color: #383838;
 	--light-off: #8f8f8f;
 	--light-on: #38f2ff;
@@ -311,6 +312,7 @@ html:fullscreen #openFullScreenPrompt {
 		--container-border: #000000;
 		--btn-background-color: #262626;
 		--btn-drop-shadow: drop-shadow(0px 0px 4px #000000);
+		--btn-pressed-background-color: #181818;
 		--text-color: #a9a9a9;
 		--light-off: #333333;
 		--light-on: #17f0ff;
