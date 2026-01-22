@@ -1,11 +1,12 @@
 // if not running in Electron, redirect to home page
-if (!window.electron && !location.host.startsWith('localhost')) {
+if (!window.electron && !window.location.host.startsWith('localhost')) {
     window.location.href = 'https://beckersuite.com';
 }
 
 import { GoogleSignInWithFirebase } from './firebase.js';
 import PlayerManager from './player_manager.js';
-if (window.location.hostname !== 'localhost')
+
+if (!window.location.host.startsWith('localhost')) {
     GoogleSignInWithFirebase()
         .then((result) => {
             const loginOverlay = document.querySelector('#loginOverlay');
@@ -17,7 +18,7 @@ if (window.location.hostname !== 'localhost')
             }
         })
         .catch(() => { });
-else {
+} else {
     PlayerManager.init();
     const loginOverlay = document.querySelector('#loginOverlay');
     loginOverlay.classList?.add('loggedIn');
@@ -28,5 +29,5 @@ window.PlayerManager = PlayerManager;
 
 window.startWii = (startBtn) => {
     window.electron.startWii();
-    startBtn.style.display = 'none';
+    startBtn.disabled = true;
 }

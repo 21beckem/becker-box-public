@@ -22,7 +22,7 @@ const PlayerManager = new (class PlayerManager {
     }
     init() {
         // tell the backend that we are ready
-        window.electron.init();
+        window.electron?.init();
 
         if (window.location.hostname === 'localhost')
             this.peer = new Peer('beckerbox');

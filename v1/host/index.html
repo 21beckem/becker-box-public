@@ -16,6 +16,45 @@ i {
 body {
     font-family: 'Wii', sans-serif;
 }
+
+main {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+
+    * {}
+    .top-btns {
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem 2rem;
+        padding-bottom: 0;
+    }
+
+    .middle {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .middle > div {
+        text-align: center;
+    }
+
+    .connected-phones {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        padding: 1rem 0;
+    }
+}
+
+
+
 #close {
     position: absolute;
     top: 2rem;
@@ -27,13 +66,6 @@ body {
     top: 2rem;
     right: 2rem;
 }
-center-on-page {
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
 #title {
     font-family: 'Wii', sans-serif;
     font-size: 6rem;
@@ -41,7 +73,6 @@ center-on-page {
     text-align: center;
     text-shadow: 0px 0px 10px #000;
     margin: 0;
-    margin-top: 5rem;
 }
 .blueBorder {
     font-family: 'Wii', sans-serif, monospace;
@@ -79,6 +110,12 @@ center-on-page {
     font-size: 18px;
     padding: 0.5rem 0.8rem;
 }
+.wiiBtn:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    filter: grayscale();
+    cursor: not-allowed;
+}
 #qrcode {
     width: 200px;
     height: 200px;
@@ -112,10 +149,6 @@ center-on-page {
 }
 
 #remoteStatuses {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
     display: flex;
     flex-direction: row;
     gap: 3rem;
@@ -261,57 +294,68 @@ center-on-page {
     <script src="https://cdn.jsdelivr.net/npm/peerjs@1.3.2/dist/peerjs.min.js"></script>
 </head>
 <body>
-    <button id="close" class="wiiBtn" onclick="window.close()">Close</button>
-    <button id="open-games-dir" class="wiiBtn" onclick="window.electron.openGamesFolder()">Open Games Folder</button>
+    <main>
+        <section class="top-btns">
+            <button class="wiiBtn" onclick="window.close()">Close</button>
+            <button class="wiiBtn" onclick="window.electron.openGamesFolder()">Open Games Folder</button>
+        </section>
+        <section class="middle">
+            <div>
+                <h1 id="title">BeckerBox</h1>
+                <h2 style="margin: 0; color: gray">Time to connect your Remotes</h2>
+            </div>
+            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <h3>Scan this with your phone:</h3>
+                <div id="qrcode" class="blueBorder">
+                    <div class="loader"></div>
+                </div>
+                <br>
+                <button class="wiiBtn" onclick="window.startWii(this)">Start</button>
+            </div>
+        </section>
+        <section class="connected-phones">
+            <div id="remoteStatuses">
+                <remote-container class="p1">
+                    <div class="phone-icon">
+                        <i class="fa-solid fa-mobile"></i>
+                        <i class="fa-solid fa-circle-check"></i>
+                        <div class="connecting-loader"></div>
+                    </div>
+                    <button class="wiiBtn small disconnect">scan now...</button>
+                </remote-container>
+                <remote-container class="p2">
+                    <div class="phone-icon">
+                        <i class="fa-solid fa-mobile"></i>
+                        <i class="fa-solid fa-circle-check"></i>
+                        <div class="connecting-loader"></div>
+                    </div>
+                    <button class="wiiBtn small disconnect">scan now...</button>
+                </remote-container>
+                <remote-container class="p3">
+                    <div class="phone-icon">
+                        <i class="fa-solid fa-mobile"></i>
+                        <i class="fa-solid fa-circle-check"></i>
+                        <div class="connecting-loader"></div>
+                    </div>
+                    <button class="wiiBtn small disconnect">scan now...</button>
+                </remote-container>
+                <remote-container class="p4">
+                    <div class="phone-icon">
+                        <i class="fa-solid fa-mobile"></i>
+                        <i class="fa-solid fa-circle-check"></i>
+                        <div class="connecting-loader"></div>
+                    </div>
+                    <button class="wiiBtn small disconnect">scan now...</button>
+                </remote-container>
+            </div>
+        </section>
+    </main>
     <center>
-        <h1 id="title">BeckerBox</h1>
-        <h2 style="margin: 0; color: gray">Time to connect your Remotes</h2>
     </center>
     <center-on-page>
         <center>
-            <h3>Scan this with your phone:</h3>
-            <div id="qrcode" class="blueBorder">
-                <div class="loader"></div>
-            </div>
-            <br><br>
-            <button class="wiiBtn" onclick="window.startWii(this)">Start</button>
         </center>
     </center-on-page>
-
-    <div id="remoteStatuses" class="">
-        <remote-container class="p1">
-            <div class="phone-icon">
-                <i class="fa-solid fa-mobile"></i>
-                <i class="fa-solid fa-circle-check"></i>
-                <div class="connecting-loader"></div>
-            </div>
-            <button class="wiiBtn small disconnect">scan now...</button>
-        </remote-container>
-        <remote-container class="p2">
-            <div class="phone-icon">
-                <i class="fa-solid fa-mobile"></i>
-                <i class="fa-solid fa-circle-check"></i>
-                <div class="connecting-loader"></div>
-            </div>
-            <button class="wiiBtn small disconnect">scan now...</button>
-        </remote-container>
-        <remote-container class="p3">
-            <div class="phone-icon">
-                <i class="fa-solid fa-mobile"></i>
-                <i class="fa-solid fa-circle-check"></i>
-                <div class="connecting-loader"></div>
-            </div>
-            <button class="wiiBtn small disconnect">scan now...</button>
-        </remote-container>
-        <remote-container class="p4">
-            <div class="phone-icon">
-                <i class="fa-solid fa-mobile"></i>
-                <i class="fa-solid fa-circle-check"></i>
-                <div class="connecting-loader"></div>
-            </div>
-            <button class="wiiBtn small disconnect">scan now...</button>
-        </remote-container>
-    </div>
 
     <div id="loginOverlay">
         <center-on-page class="loading-page">
