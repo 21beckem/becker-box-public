@@ -13,20 +13,22 @@
 i {
     pointer-events: none;
 }
+html {
+    overflow: hidden;
+}
 body {
     font-family: 'Wii', sans-serif;
 }
 
 main {
-    position: absolute;
+    /* position: absolute; */
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    min-width: 100vw;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 
-    * {}
     .top-btns {
         display: flex;
         justify-content: space-between;
@@ -57,14 +59,14 @@ main {
 
 #close {
     position: absolute;
-    top: 2rem;
-    left: 2rem;
+    top: 10px;
+    left: 10px;
     z-index: 1500;
 }
 #open-games-dir {
     position: absolute;
-    top: 2rem;
-    right: 2rem;
+    top: 10px;
+    right: 10px;
 }
 #title {
     font-family: 'Wii', sans-serif;
@@ -295,10 +297,8 @@ main {
 </head>
 <body>
     <main>
-        <section class="top-btns">
-            <button class="wiiBtn" onclick="window.close()">Close</button>
-            <button class="wiiBtn" onclick="window.electron.openGamesFolder()">Open Games Folder</button>
-        </section>
+        <button id="close" class="wiiBtn" onclick="window.close()">Close</button>
+        <button id="open-games-dir" class="wiiBtn" onclick="window.electron.openGamesFolder()">Open Games Folder</button>
         <section class="middle">
             <div>
                 <h1 id="title">BeckerBox</h1>

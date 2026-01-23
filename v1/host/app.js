@@ -5,6 +5,8 @@ if (!window.electron && !window.location.host.startsWith('localhost')) {
 
 import { GoogleSignInWithFirebase } from './firebase.js';
 import PlayerManager from './player_manager.js';
+import scaleScreenToFit from './scale-screen.js';
+scaleScreenToFit();
 
 if (!window.location.host.startsWith('localhost')) {
     GoogleSignInWithFirebase()
