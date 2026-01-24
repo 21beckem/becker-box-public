@@ -42,10 +42,11 @@ const PlayerManager = new (class PlayerManager {
             this.removePlayer(existing.slot);
             slot = existing.slot;
         } else {
-            slot = await window.electron.addPlayer();
+            slot = await window.electron?.addPlayer();
         }
 
-        if (slot === null) {
+        if (slot === null || slot === undefined) {
+            slot = null;
             console.log('All slots taken');
             setTimeout(() => conn.send({slot: slot}), 500);
             return;

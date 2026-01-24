@@ -1,5 +1,12 @@
 let noSleep = new window.NoSleep();
 const _ = (x) => document.getElementById(x);
+
+const onMobile = window.matchMedia("(any-pointer: coarse)").matches;
+if (!onMobile) {
+	// if not on mobile, don't bother with fullscreen prompt
+	document.documentElement.classList.add('mobile');
+	_('openFullScreenPrompt').style.display = 'none';
+}
 export default class GeneralGUI {
     static async attemptFullscreen() {
 		// Request motion events permission for iOS 13+ devices

@@ -33,3 +33,37 @@ window.startWii = (startBtn) => {
     window.electron.startWii();
     startBtn.disabled = true;
 }
+
+
+if (!window.electron) {
+    window.electron = {
+        init: () => {
+            console.log(`Electron not present. electon.init called.`);
+        },
+        openGamesFolder: () => {
+            console.log(`Electron not present. electon.openGamesFolder called.`);
+        },
+        addPlayer: () => {
+            console.log(`Electron not present. electon.addPlayer called.`);
+            return PlayerManager.players.indexOf(null);
+        },
+        removePlayer: (slot) => {
+            console.log(`Electron not present. electon.removePlayer called.`);
+        },
+        sendPacket: (slot, data) => {
+            console.log(`Electron not present. electon.sendPacket called.`);
+        },
+        startWii: () => {
+            console.log(`Electron not present. electon.startWii called.`);
+        },
+        getDiscList: () => {
+            console.log(`Electron not present. electon.getDiscList called.`);
+        },
+        changeDisc: (path) => {
+            console.log(`Electron not present. electon.changeDisc called.`);
+        },
+        powerOff: () => {
+            console.log(`Electron not present. electon.powerOff called.`);
+        }
+    }
+}

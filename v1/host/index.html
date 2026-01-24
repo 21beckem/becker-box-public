@@ -175,6 +175,15 @@ main {
         .wiiBtn {
             filter: grayscale() opacity(0.8);
         }
+        .signal-lost {
+            display: none;
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.1rem;
+            color: white;
+        }
         .fa-circle-check {
             display: none;
             position: absolute;
@@ -210,11 +219,36 @@ main {
         .wiiBtn {
             filter: none;
         }
+        .signal-lost {
+            display: none;
+        }
         .fa-circle-check {
             display: block;
         }
         .connecting-loader {
             display: none;
+        }
+    }
+    
+    remote-container.signal-lost {
+        pointer-events: all;
+        * {
+            pointer-events: all;
+        }
+        .phone-icon .fa-mobile {
+            color: #e9bd44;
+        }
+        .signal-lost {
+            display: block;
+        }
+        .wiiBtn {
+            filter: none;
+        }
+        .fa-circle-check {
+            display: none;
+        }
+        .connecting-loader {
+            display: block;
         }
     }
 }
@@ -320,6 +354,7 @@ main {
                         <i class="fa-solid fa-mobile"></i>
                         <i class="fa-solid fa-circle-check"></i>
                         <div class="connecting-loader"></div>
+                        <div class="signal-lost">reconnecting...</div>
                     </div>
                     <button class="wiiBtn small disconnect">scan now...</button>
                 </remote-container>
@@ -328,6 +363,7 @@ main {
                         <i class="fa-solid fa-mobile"></i>
                         <i class="fa-solid fa-circle-check"></i>
                         <div class="connecting-loader"></div>
+                        <div class="signal-lost">reconnecting...</div>
                     </div>
                     <button class="wiiBtn small disconnect">scan now...</button>
                 </remote-container>
@@ -336,6 +372,7 @@ main {
                         <i class="fa-solid fa-mobile"></i>
                         <i class="fa-solid fa-circle-check"></i>
                         <div class="connecting-loader"></div>
+                        <div class="signal-lost">reconnecting...</div>
                     </div>
                     <button class="wiiBtn small disconnect">scan now...</button>
                 </remote-container>
@@ -344,6 +381,7 @@ main {
                         <i class="fa-solid fa-mobile"></i>
                         <i class="fa-solid fa-circle-check"></i>
                         <div class="connecting-loader"></div>
+                        <div class="signal-lost">reconnecting...</div>
                     </div>
                     <button class="wiiBtn small disconnect">scan now...</button>
                 </remote-container>

@@ -115,6 +115,9 @@ class Remote {
 			} else if (data.poweredOff === true) {
 				this.destroy();
 				this.GUI.alertPowerOff();
+			} else if (data.type === 'hb') {
+				// heartbeat response
+				this.conn.send({type: 'hbr', id: data.id});
 			}
 		});
 		this.conn.on('disconnected', () => {

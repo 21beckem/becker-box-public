@@ -7,26 +7,7 @@ window.refreshConnection = (code=null, force=true) => {
     remote = new Remote(code);
 };
 window.refreshConnection(null, false);
-
-// window.qrScanner = new QrScanner(
-//     document.querySelector('#qrScannerPreview'),
-//     result => {
-//         console.log('got QR result:', result);
-//         if (!result.data) return;
-
-//         // verify it's a valid url
-//         let url;
-//         try {
-//             url = new URL(result.data.trim());
-//         } catch (e) { return }
-        
-//         // verify search param exists
-//         let id = url.searchParams.get('id');
-//         if (id===null || id===undefined) return;
-
-//         // connect
-//         console.log('connecting to', id);
-//         remote.connectWithCode(id);
-//     },
-//     {}
-// );
+window.disconnectRemote = () => {
+    remote?.destroy();
+    remote = null;
+};

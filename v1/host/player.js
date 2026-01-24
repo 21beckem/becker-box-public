@@ -1,9 +1,11 @@
 import Pointer from "./pointer.js";
+import Heartbeat from "./heartbeat.js";
 const DISCONNECT_TIMEOUT_MS = 5000;
 
 export default class Player {
     #disconnectTimeout = null;
     #alertedAboutPowerOff = false;
+    #remoteContainer = null;
     constructor(slot, conn, parent) {
         this.removed = false;
         this.slot = slot;
@@ -12,27 +14,54 @@ export default class Player {
         this.pointer = new Pointer(this.slot, parent);
         this.#initConn();
 
-        this.remoteContainer = document.querySelector('remote-container.p'+(slot+1));
-        this.remoteContainer.classList.add('connected');
-        this.remoteContainer.querySelector('.disconnect').innerText = 'Disconnect';
-        this.remoteContainer.querySelector('.disconnect').onclick = () => this.parent.removePlayer(this.slot);
+        this.#remoteContainer = document.querySelector('remote-container.p'+(slot+1));
+        this.#UI.healthy();
+    }
+    #UI = {
+        healthy: () => {
+            this.#remoteContainer.classList.add('connected');
+            this.#remoteContainer.classList.remove('signal-lost');
+            this.#remoteContainer.querySelector('.disconnect').innerText = 'Disconnect';
+            this.#remoteContainer.querySelector('.disconnect').onclick = () => this.parent.removePlayer(this.slot);
+        },
+        sick: () => {
+            this.#remoteContainer.classList.remove('connected');
+            this.#remoteContainer.classList.add('signal-lost');
+            this.#remoteContainer.querySelector('.disconnect').innerText = 'Disconnect';
+            this.#remoteContainer.querySelector('.disconnect').onclick = () => this.parent.removePlayer(this.slot);
+        },
+        dead: () => {
+            this.#remoteContainer.classList.remove('connected');
+            this.#remoteContainer.classList.remove('signal-lost');
+            this.#remoteContainer.querySelector('.disconnect').innerText = 'scan now...';
+            this.#remoteContainer.querySelector('.disconnect').onclick = null;
+        }
+    }
+    #setupHeartbeat() {
+        this.heartbeat = new Heartbeat(this.conn);
+        this.heartbeat.start();
+
+        this.heartbeat.on('healthy', () => this.#UI.healthy() );
+        this.heartbeat.on('sick', () => this.#UI.sick() );
+        this.heartbeat.on('dead', () => this.parent.removePlayer(this.slot) );  
     }
     #initConn() {
         this.conn.on('open', () => {
             this.conn.send({slot: this.slot});
+            this.#setupHeartbeat();
         })
         this.conn.on('data', (data) => {
             if (data.menuAction) {
                 switch (data.menuAction) {
                     case 'getDiscs':
-                        window.electron.getDiscList()
+                        window.electron?.getDiscList()
                             .then(result => this.conn.send({result}));
                         break;
                     case 'changeDisc':
-                        window.electron.changeDisc(data.path);
+                        window.electron?.changeDisc(data.path);
                         break;
                     case 'powerOff':
-                        window.electron.powerOff()
+                        window.electron?.powerOff()
                             .then(result => {
                                 this.conn.send({result});
                                 if (result) this.#alertedAboutPowerOff = true;
@@ -46,13 +75,12 @@ export default class Player {
             this.pointer.newPacket(data);
             data.PointX = this.pointer.AnalogX;
             data.PointY = this.pointer.AnalogY;
-            window.electron.sendPacket(this.slot, data);
+            window.electron?.sendPacket(this.slot, data);
         });
     }
     remove() {
         this.#disconnect();
-        this.remoteContainer.classList.remove('connected');
-        this.remoteContainer.querySelector('.disconnect').innerText = 'scan now...';
+        this.#UI.dead();
     }
     alertPowerOff() {
         if (this.#alertedAboutPowerOff) return;
@@ -65,11 +93,13 @@ export default class Player {
     #disconnect() {
         if (this.removed) return;
         this.removed = true;
+        this.heartbeat.destroy();
+        this.heartbeat = null;
 
-        console.warn(`Disconnecting slot ${this.slot} due to inactivity`);
+        console.warn(`Disconnecting slot ${this.slot}`);
         this.conn.close();
         this.pointer.remove();
-        window.electron.removePlayer(this.slot);
+        window.electron?.removePlayer(this.slot);
         this.parent.removePlayer(this.slot);
     }
 }
