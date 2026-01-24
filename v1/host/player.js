@@ -1,9 +1,7 @@
 import Pointer from "./pointer.js";
 import Heartbeat from "./heartbeat.js";
-const DISCONNECT_TIMEOUT_MS = 5000;
 
 export default class Player {
-    #disconnectTimeout = null;
     #alertedAboutPowerOff = false;
     #remoteContainer = null;
     #health = 'healthy';

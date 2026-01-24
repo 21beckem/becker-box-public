@@ -1,10 +1,10 @@
 (() => {
     // get styles from script element
     const style = {
-        backgroundColor: document.currentScript.getAttribute('background-color') || 'white',
-        defaultColor: document.currentScript.getAttribute('default-color') || 'black',
-        selectedColor: document.currentScript.getAttribute('selected-color') || 'white',
-        selectedHighlight: document.currentScript.getAttribute('selected-highlight') || '#007bff'
+        backgroundColor: document.currentScript.getAttribute('background-color') || 'transparent',
+        defaultColor: document.currentScript.getAttribute('default-color') || 'var(--font-color)',
+        selectedColor: document.currentScript.getAttribute('selected-color') || 'var(--selected-font-color)',
+        selectedHighlight: document.currentScript.getAttribute('selected-highlight') || 'var(--selected-highlight-color)'
     };
     const dialPopupBox = document.createElement('div');
     dialPopupBox.classList.add('dialPopupBox', 'hidden');
@@ -132,8 +132,8 @@
                 const distance = Math.abs(itemCenter - dialCenter);
         
                 // Adjust the font size based on the distance from the center
-                const maxFontSize = 30; // Maximum font size
-                const minFontSize = 8; // Minimum font size
+                const maxFontSize = 20; // Maximum font size
+                const minFontSize = 15; // Minimum font size
                 const maxDistance = dialRect.height / 2;
         
                 let fontSize = maxFontSize - (distance / maxDistance) * (maxFontSize - minFontSize);

@@ -58,7 +58,20 @@ if (window.electron === undefined) {
         },
         getDiscList: () => {
             // console.log(`Electron not present. electon.getDiscList called.`);
-            return Promise.resolve([]);
+            return Promise.resolve([
+                {
+                    name: 'LEGO Indiana Jones - The Original Adventures',
+                    path: '/path/to/lego_indiana_jones.iso'
+                },
+                {
+                    name: 'Wii Sports',
+                    path: '/path/to/wii_sports.iso'
+                },
+                {
+                    name: 'Wii Sports Resort',
+                    path: '/path/to/wii_sports_resort.iso'
+                }
+            ]);
         },
         changeDisc: (path) => {
             // console.log(`Electron not present. electon.changeDisc called.`);

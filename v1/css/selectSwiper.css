@@ -1,10 +1,18 @@
 .dialPopupBox {
+    --background-color: white;
+    --dimmer-background-color: rgba(0, 0, 0, 0.5);
+    --options-separator-color: #ddd;
+    --shadow: rgba(0, 0, 0, 0.2);
+    --font-color: black;
+    --selected-font-color: black;
+    --selected-highlight-color: #cfecff;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     display: flex;
+    color: var(--font-color);
     justify-content: center;
     align-items: center;
     z-index: 100;
@@ -22,7 +30,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--dimmer-background-color);
 }
 
 .dialPopupBox .dial-container {
@@ -47,11 +55,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: white;
+    background-color: var(--background-color);
     overflow-y: auto;
     scroll-snap-type: y mandatory;
     scrollbar-width: none; /* Firefox */
-    box-shadow: 2px 2px 12px -2px rgba(0, 0, 0, 0.5);
+    box-shadow: 2px 2px 12px -2px var(--shadow);
     border-radius: 30px;
 }
 .dialPopupBox .dial-container .dial::-webkit-scrollbar {
@@ -64,7 +72,7 @@
     text-align: center;
     scroll-snap-align: center;
     cursor: pointer;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--options-separator-color);
     transition: background-color 0.3s ease;
     min-height: 50px;
     display: flex;
@@ -81,9 +89,22 @@
 
 .dialPopupBox .dial-container .select-btn {
     margin-top: 2rem;
-    background-color: white;
+    background-color: var(--background-color);
     padding: 1rem 2rem;
     border-radius: 1.5rem;
-    box-shadow: 2px 2px 12px -2px rgba(0, 0, 0, 0.5);
+    box-shadow: 2px 2px 12px -2px var(--shadow);
     cursor: pointer;
+}
+
+/* dark mode! */
+@media (prefers-color-scheme: dark) {
+	.dialPopupBox {
+        --background-color: #212121;
+        --dimmer-background-color: rgba(82, 82, 82, 0.5);
+        --options-separator-color: #1f1f1f;
+        --shadow: rgba(97, 97, 97, 0.2);
+        --font-color: white;
+        --selected-font-color: white;
+        --selected-highlight-color: #2e5b89;
+    }
 }
