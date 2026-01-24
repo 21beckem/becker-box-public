@@ -118,6 +118,9 @@ class Remote {
 			} else if (data.type === 'hb') {
 				// heartbeat response
 				this.conn.send({type: 'hbr', id: data.id});
+			} else if (data.getPreferredSlot === true) {
+				// respond with preferred slot if any
+				this.conn.send({ result: this.GUI.getPreferredSlotFromSession() });
 			}
 		});
 		this.conn.on('disconnected', () => {
@@ -269,7 +272,31 @@ class RemoteGui {
 		let dist = aBtn.getBoundingClientRect().top - 127.5;
 		document.documentElement.style.setProperty('--bBtn-top', `${dist}px`);
 	}
+	#keepSavingMySlotToSession(slot) {
+		if (slot===null || slot===undefined) {
+			localStorage.removeItem('preferredSlot');
+			return;
+		}
+		setInterval(() => {
+			localStorage.setItem('preferredSlot', JSON.stringify({ slot, timestamp: Date.now() }));
+		}, 1000);
+	}
+	getPreferredSlotFromSession() {
+		let data = localStorage.getItem('preferredSlot');
+		
+		if (!data) return null;
+		try {
+			data = JSON.parse(data);}
+		catch { return null; }
+		
+		// if the saved preferred slot is older than 60 seconds, ignore it
+		if (Date.now() - data.timestamp > (60 * 1000))
+			return null;
+
+		return data.slot;
+	}
 	setSlot(s) {
+		this.#keepSavingMySlotToSession(s);
 		Array.from(_('lights').children).forEach(div => div.classList.remove('on'));
 		_('lights').children[s]?.classList.add('on');
 

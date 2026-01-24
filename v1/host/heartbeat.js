@@ -9,7 +9,7 @@ export default class Heartbeat {
     constructor(conn) {
 		this.conn = conn;
 		this.interval = 500;
-		this.failsBeforeDisconnect = 5;
+		this.failsBeforeDisconnect = 10;
 		this.requestTimeout = 1000;
 	}
 	on(event, callback) {
@@ -54,7 +54,7 @@ export default class Heartbeat {
 				resolve(false);
 			}, this.requestTimeout);
 		});
-        console.log('Heartbeat result:', result);
+		if (this.#destroyed) return;
         if (result) {
             this.#emit('healthy');
             this.#failCount = 0;
