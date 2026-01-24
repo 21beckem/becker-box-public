@@ -35,7 +35,7 @@ window.startWii = (startBtn) => {
 }
 
 
-if (!window.electron) {
+if (window.electron === undefined) {
     window.electron = {
         init: () => {
             // console.log(`Electron not present. electon.init called.`);
@@ -58,12 +58,14 @@ if (!window.electron) {
         },
         getDiscList: () => {
             // console.log(`Electron not present. electon.getDiscList called.`);
+            return Promise.resolve([]);
         },
         changeDisc: (path) => {
             // console.log(`Electron not present. electon.changeDisc called.`);
         },
         powerOff: () => {
             // console.log(`Electron not present. electon.powerOff called.`);
+            return Promise.resolve();
         }
     }
 }

@@ -83,6 +83,7 @@ export default class Player {
                 }
                 return;
             }
+            if (data.type === 'hbr') return; // heartbeat response
 
             this.pointer.newPacket(data);
             data.PointX = this.pointer.AnalogX;
