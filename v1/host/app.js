@@ -35,6 +35,7 @@ window.startWii = (startBtn) => {
 }
 
 
+// Mock electron object for non-electron development
 if (window.electron === undefined) {
     window.electron = {
         init: () => {

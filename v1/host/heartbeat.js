@@ -1,6 +1,7 @@
 export default class Heartbeat {
 	#destroyed = false;
     #failCount = 0;
+    #lastPingTime = 0;
     #eventListeners = {
         healthy: [],
         sick: [],
@@ -38,14 +39,15 @@ export default class Heartbeat {
 		let result = await new Promise((resolve) => {
 			let gotData = false;
             const randomId = Math.random().toString(36).substring(7);
+            const startTime = Date.now();
 			const handleData = (data) => {
                 if (data !== null && data !== undefined && data.type === 'hbr' && data.id === randomId) {
                     gotData = true;
                     this.conn.off('data', handleData);
-                    resolve(true);
+                    resolve(Date.now() - startTime);
                 }
 			}
-			this.conn.send({type: 'hb', id: randomId});
+			this.conn.send({type: 'hb', id: randomId, lastPingTime: this.#lastPingTime});
 			this.conn.on('data', handleData);
 
 			setTimeout(() => {
@@ -55,7 +57,9 @@ export default class Heartbeat {
 			}, this.requestTimeout);
 		});
 		if (this.#destroyed) return;
-        if (result) {
+        if (result !== false) {
+            this.#lastPingTime = result;
+            console.log(`Heartbeat ping: ${result.toFixed(2)} ms`);
             this.#emit('healthy');
             this.#failCount = 0;
         } else {

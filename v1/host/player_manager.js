@@ -1,6 +1,15 @@
 import Player from './player.js';
 import { Peer } from 'https://esm.sh/peerjs@1.5.5?bundle-deps';
 
+const PEER_CONFIG = {
+    host: "peerjs-server-220439816037.southamerica-west1.run.app",
+    port: 443,
+    path: "/",
+    secure: true,
+    key: "207427b37dd0c0c08ea29ba38ab14429",
+    config: { iceServers: [{ urls: "stun:stun.l.google.com:19302" }] }
+};
+
 // manage players
 const PlayerManager = new (class PlayerManager {
     #backendActivatedPlayers = [false, false, false, false];
@@ -26,9 +35,9 @@ const PlayerManager = new (class PlayerManager {
         window.electron?.init();
 
         if (window.location.hostname === 'localhost')
-            this.peer = new Peer('beckerbox');
+            this.peer = new Peer('beckerbox', PEER_CONFIG);
         else
-            this.peer = new Peer();
+            this.peer = new Peer(undefined, PEER_CONFIG);
         this.peer.on('open', (id) => {
             this.#setQrCode(id);
         });

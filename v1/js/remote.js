@@ -19,7 +19,15 @@ const status = {
 		</div>
 		<br>
 		Please ${REFRESH}`
-}
+};
+const PEER_CONFIG = {
+    host: "peerjs-server-220439816037.southamerica-west1.run.app",
+    port: 443,
+    path: "/",
+    secure: true,
+    key: "207427b37dd0c0c08ea29ba38ab14429",
+    config: { iceServers: [{ urls: "stun:stun.l.google.com:19302" }] }
+};
 
 const PACKET = {
 	Home: 0,
@@ -53,7 +61,7 @@ class Remote {
 	searchParams = new URLSearchParams(window.location.search);
 	constructor(code) {
 		this.GUI = new RemoteGui(this);
-		this.peer = new Peer(null);
+		this.peer = new Peer(null, PEER_CONFIG);
 		this.GUI.setConnectingStatus(status.connecting);
 		this.peer.on('open', () => {
 			// attempt to connect
@@ -90,7 +98,7 @@ class Remote {
 		}
 		code = code || this.searchParams.get('id');
 
-		this.conn = this.peer.connect(code);
+		this.conn = this.peer.connect(code, PEER_CONFIG);
 		this.conn.on('open', () => {
 			this.connOpen = true;
 			console.log('Peer opened');
