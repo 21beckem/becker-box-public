@@ -20,7 +20,7 @@
 }
 
 html, body {
-	touch-action: none;
+	touch-action: manipulation;
 	-webkit-touch-callout: none;
 	margin: 0;
 	padding: 0;
