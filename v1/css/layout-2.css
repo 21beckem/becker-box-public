@@ -111,8 +111,11 @@ remote.layout-2 {
 		transform: scale(1.1);
 	}
 	
-	.homeRow div[data-key="Home"] svg {
+	div[data-key="Home"] svg {
 		transform: scale(0.7);
+	}
+	[data-key="Home"] {
+		color: var(--home-btn-color);
 	}
 	
 	.numBtns {

@@ -2,7 +2,8 @@ let noSleep = new window.NoSleep();
 const _ = (x) => document.getElementById(x);
 
 const onMobile = window.matchMedia("(any-pointer: coarse)").matches;
-if (!onMobile) {
+const searchParams = new URLSearchParams(window.location.search);
+if (!onMobile || searchParams.get('id') === 'dev-env') {
 	// if not on mobile, don't bother with fullscreen prompt
 	document.documentElement.classList.add('mobile');
 	_('openFullScreenPrompt').style.display = 'none';

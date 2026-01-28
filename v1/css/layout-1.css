@@ -17,16 +17,16 @@ remote.layout-1 {
 		z-index: 1;
 	}
 	.bTri.one .btn {
-		left: calc(var(--bBtn-size) / -2)
+		left: calc(var(--bBtn-size) / -2);
 	}
 	.bTri.two .btn {
-		right: calc(var(--bBtn-size) / -2)
+		right: calc(var(--bBtn-size) / -2);
 	}
 	.bTri.one .text {
-		left: 30px
+		left: 30px;
 	}
 	.bTri.two .text {
-		right: 30px
+		right: 30px;
 	}
 	.bTri .text {
 		position: fixed;
@@ -101,8 +101,11 @@ remote.layout-1 {
 		border-radius: 50%;
 	}
 	
-	.homeRow div[data-key="Home"] svg {
+	div[data-key="Home"] svg {
 		transform: scale(0.7);
+	}
+	[data-key="Home"] {
+		color: var(--home-btn-color);
 	}
 	
 	.numBtns {

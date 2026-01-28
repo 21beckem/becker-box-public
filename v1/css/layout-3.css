@@ -84,6 +84,9 @@ remote.layout-3 {
 	.homeRow div[data-key="Home"] svg {
 		transform: scale(0.7);
 	}
+	[data-key="Home"] {
+		color: var(--home-btn-color);
+	}
 	
 	.dpad {
 		display: flex;

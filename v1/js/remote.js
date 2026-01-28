@@ -47,7 +47,8 @@ const PACKET = {
 	NunX: 128,
 	NunY: 128
 };
-const iPhoneAdjustment = navigator.userAgent.toLowerCase().includes('iphone') ? -1 : 1;
+const iPhoneAdjustment = navigator.userAgent.toLowerCase().includes('iphone') ||
+	navigator.userAgent.toLowerCase().includes('macintosh') ? -1 : 1;
 
 class Remote {
 	searchParams = new URLSearchParams(window.location.search);
@@ -89,6 +90,8 @@ class Remote {
 			return;
 		}
 		code = code || this.searchParams.get('id');
+
+		if (code === 'dev-env') return this.GUI.showRemotePage();
 
 		this.conn = this.peer.connect(code);
 		this.conn.on('open', () => {
