@@ -12,8 +12,8 @@
 	--btn-pressed-background-color: #acacac;
 	--text-color: #383838;
 	--light-off: #8f8f8f;
-	--light-on: #38f2ff;
-	--light-on-shadow: #48c8ff;
+	--light-on: #26ff14;
+	--light-on-shadow: #45ff3d2e;
 	--wiiBtn-background-color: white;
 	--wiiBtn-color: #323232;
 	--side-panel-background-color: white;
@@ -319,8 +319,8 @@ html:fullscreen #openFullScreenPrompt {
 		--btn-pressed-background-color: #181818;
 		--text-color: #a9a9a9;
 		--light-off: #333333;
-		--light-on: #17f0ff;
-		--light-on-shadow: #0a4c68;
+		--light-on: #14ff00;
+		--light-on-shadow: #45ff3d4a;
 		--wiiBtn-background-color: #343434;
 		--wiiBtn-color: #f3f3f3;
 		--side-panel-background-color: black;

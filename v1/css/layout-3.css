@@ -80,6 +80,8 @@ remote.layout-3 {
 	.homeRow div:not([data-key="Home"]) {
 		font-size: 0.9em;
 		border-radius: 10px;
+        -webkit-text-stroke-width: 0.5px;
+        -webkit-text-stroke-color: currentColor;
 	}
 	.homeRow div[data-key="Home"] svg {
 		transform: scale(0.7);
