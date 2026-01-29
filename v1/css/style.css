@@ -21,7 +21,6 @@
 }
 
 html, body {
-	touch-action: manipulation;
 	-webkit-touch-callout: none;
 	margin: 0;
 	padding: 0;
@@ -35,6 +34,7 @@ html, body {
 	-moz-user-select: none; /* Firefox */
 	-ms-user-select: none; /* Internet Explorer/Edge */
 	user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera, and other modern browsers */
+	touch-action: manipulation !important;
 }
 
 i {
@@ -52,7 +52,6 @@ i {
 	margin: 0;
 	overflow: hidden;
 	flex-direction: column;
-	touch-action: manipulation;
 	color: var(--text-color);
 	padding: 0 30px;
 }
@@ -83,7 +82,6 @@ i {
 	margin: 0;
 	overflow: hidden;
 	flex-direction: column;
-	touch-action: manipulation;
 	color: var(--text-color);
 }
 #RemotePage remote .bTri.one {
