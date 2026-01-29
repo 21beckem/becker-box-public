@@ -2,8 +2,9 @@ remote.layout-1 {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	justify-content: space-evenly;
-    margin-bottom: 40px;
+	justify-content: space-between;
+	margin-top: 25px;
+    margin-bottom: 30px;
 	flex: 1;
 
 	.bTri .btn {
@@ -37,7 +38,6 @@ remote.layout-1 {
 	}
 	
 	.dpad {
-		margin-top: 35px;
 		display: flex;
 		flex-wrap: wrap;
 		width: 150px;
@@ -86,31 +86,41 @@ remote.layout-1 {
 		font-size: 30px;
 	}
 	
-	.homeRow {
-		margin-top: 20px;
-		width: 200px;
+	.volumeBtns {
+		position: absolute;
 		display: flex;
-		justify-content: space-between;
+		top: var(--bBtn-top);
+		flex-direction: column;
+		margin-top: 1rem;
+		gap: 10vh;
 	}
-	.homeRow div {
-		width: 30px;
+	.volumeBtns.left { left: 1rem; display: var(--bBtn-show-right); }
+	.volumeBtns.right { right: 1rem; display: var(--bBtn-show-left); }
+	.volumeBtns div, [data-key="Home"] {
+		width: 2rem;
 		aspect-ratio: 1;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		border-radius: 50%;
+		border-radius: 30%;
+	}
+	.volumeBtns div i {
+        -webkit-text-stroke-width: 0.5px;
+        -webkit-text-stroke-color: currentColor;
 	}
 	
-	div[data-key="Home"] svg {
-		transform: scale(0.7);
-	}
 	[data-key="Home"] {
 		color: var(--home-btn-color);
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		border-radius: 50%;
+		z-index: 15;
 	}
 	
 	.numBtns {
-		margin-top: 50px;
-		width: 50px;
+		margin-top: 30px;
+		width: 3rem;
 		height: 130px;
 		display: flex;
 		flex-direction: column;

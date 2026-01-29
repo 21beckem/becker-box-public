@@ -391,8 +391,8 @@ class RemoteGui {
 		else
 			this.handDominance = this.handDominance==='right' ? 'left' : 'right';
 
-		document.documentElement.style.setProperty('--bBtn-show-left',  (this.handDominance==='right' ? 'auto' : 'none'));
-		document.documentElement.style.setProperty('--bBtn-show-right', (this.handDominance==='right' ? 'none' : 'auto'));
+		document.documentElement.style.setProperty('--bBtn-show-left',  (this.handDominance==='right' ? 'flex' : 'none'));
+		document.documentElement.style.setProperty('--bBtn-show-right', (this.handDominance==='right' ? 'none' : 'flex'));
 		this.#updateSideMenuText();
 	}
 	
