@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/jsalert.js"></script>
+    <title>License Input</title>
+</head>
+<body>
+    <center>
+        <h1>
+            <script>document.write(new URLSearchParams(location.search).get('msg') || 'Bruh')</script>
+        </h1>
+        
+        <input type="text" id="licenseKey" placeholder="Enter your license key here">
+        <button onclick="submitLicense()">Submit</button>
+    </center>
+
+    <script>
+let currentlySubmitting = false;
+async function submitLicense() {
+    if (currentlySubmitting) return;
+    currentlySubmitting = true;
+
+    const licenseKey = document.getElementById('licenseKey').value;
+    if (!licenseKey) {
+        JSAlert.alert('Please enter a license key', 'No license key entered', JSAlert.Icons.Warning).then(() => {
+            currentlySubmitting = false;
+        });
+        return;
+    }
+    let result = await window.electron.auth.submitLicenseKey(licenseKey);
+    
+    if (result===true) {
+        JSAlert.alert('License key accepted!', 'Success', JSAlert.Icons.Success);
+        setTimeout(() => {
+            window.close();
+        }, 1000);
+    } else {
+        JSAlert.alert('Unable to validate license key. Please try again.', 'Failed', JSAlert.Icons.Failed);
+    }
+
+    currentlySubmitting = false;
+}
+    </script>
+</body>
+</html>
