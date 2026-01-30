@@ -1,0 +1,151 @@
+remote.layout-3 {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+    width: 100%;
+	justify-content: space-evenly;
+	flex: 1;
+    margin-top: 25px;
+	margin-bottom: 0;
+
+    .remote-container {
+        display: flex;
+        width: calc(100% - 80px);
+        height: calc(50% - 100px);
+        border: 2px solid var(--container-border);
+        border-radius: 10px;
+        flex: 1;
+        padding: 10px;
+        gap: 10px;
+        position: relative;
+    }
+    .remote-container .column {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .remote-container > .column > * {
+        aspect-ratio: 1;
+        margin: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        border-radius: 20px;
+        transform: rotate(90deg);
+        height: calc(50% - 25px);
+    }
+    .remote-container .column [data-key="C"],
+    .remote-container .column [data-key="A"] {
+        border-radius: 50%;
+    }
+    .remote-container.nunchuck .joystick {
+        aspect-ratio: 1;
+        border: 2px solid var(--container-border);
+        border-radius: 50%;
+        position: relative;
+        transform: none !important;
+    }
+    .remote-container > .label {
+        writing-mode: vertical-rl;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: -1.7rem;
+        text-align: center;
+        font-size: 1.2em;
+        font-weight: bold;
+        pointer-events: none;
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    .homeRow {
+		margin: 16px 0;
+		width: 200px;
+		display: flex;
+		justify-content: space-between;
+	}
+	.homeRow div {
+		width: 30px;
+		aspect-ratio: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+        transform: rotate(90deg);
+	}
+	.homeRow div:not([data-key="Home"]) {
+		font-size: 0.9em;
+		border-radius: 10px;
+        -webkit-text-stroke-width: 0.5px;
+        -webkit-text-stroke-color: currentColor;
+	}
+	.homeRow div[data-key="Home"] svg {
+		transform: scale(0.7);
+	}
+	[data-key="Home"] {
+		color: var(--home-btn-color);
+	}
+	
+	.dpad {
+		display: flex;
+		flex-wrap: wrap;
+		aspect-ratio: 1;
+		filter: var(--btn-drop-shadow);
+	}
+	.dpad .nipple, .dpad .nipple * {
+		filter: none !important;
+	}
+	.dpad div {
+        aspect-ratio: 1;
+		flex: 0 0 33.3333%;
+		border: none;
+		font-size: 25px;
+		font-weight: bold;
+		margin: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		filter: none !important;
+	}
+	.dpad div.btn[data-key="PadN"] {
+		border-radius: var(--dpad-radius) var(--dpad-radius) 0 0;
+	}
+	.dpad div.btn[data-key="PadW"] {
+		border-radius: var(--dpad-radius) 0 0 var(--dpad-radius);
+	}
+	.dpad div.btn[data-key="PadE"] {
+		border-radius: 0 var(--dpad-radius) var(--dpad-radius) 0;
+	}
+	.dpad div.btn[data-key="PadS"] {
+		border-radius: 0 0 var(--dpad-radius) var(--dpad-radius);
+	}
+	div.btn, .dpad div.ctr {
+		background: var(--btn-background-color);
+		filter: var(--btn-drop-shadow);
+	}
+	div.btn.pressed {
+		background: var(--btn-pressed-background-color);
+	}
+	
+	.numBtns {
+		margin-top: 40px;
+		height: 160px;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 20px;
+	}
+	.numBtns div {
+		flex: 1;
+		width: 80%;
+		border-radius: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}

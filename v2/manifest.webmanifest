@@ -1,0 +1,16 @@
+{
+	"description": "Use your phone as a way to play games in the dolphin emulator! (Supports Wii Games)",
+	"name": "BeckerBox Remote",
+	"short_name": "BeckerBox",
+	"start_url": "index.html",
+	"display": "standalone",
+	"background_color": "#eaeaea",
+	"theme_color": "#eaeaea",
+	"icons": [
+		{
+			"src": "img/logo.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	]
+}

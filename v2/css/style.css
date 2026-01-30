@@ -1,0 +1,329 @@
+:root {
+	--dpad-radius: 10px;
+	--bBtn-size: 170px;
+	--bBtn-top: 120px;
+	--bBtn-show-left: unset;
+	--bBtn-show-right: auto;
+
+	--background-color: #eaeaea;
+	--container-border: #cfcfcf;
+	--btn-background-color: #dadada;
+	--btn-drop-shadow: drop-shadow(0px 0px 4px gray);
+	--btn-pressed-background-color: #acacac;
+	--text-color: #383838;
+	--light-off: #8f8f8f;
+	--light-on: #26ff14;
+	--light-on-shadow: #45ff3d2e;
+	--wiiBtn-background-color: white;
+	--wiiBtn-color: #323232;
+	--side-panel-background-color: white;
+	--home-btn-color: rgb(8 190 2);
+}
+
+html, body {
+	-webkit-touch-callout: none;
+	margin: 0;
+	padding: 0;
+	background: var(--background-color);
+	font-family: 'ADLaM Display';
+}
+* {
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera, and other modern browsers */
+	touch-action: manipulation !important;
+}
+
+i {
+	pointer-events: none;
+}
+
+.hide {
+	display: none !important;
+}
+
+#connectPage {
+	display: flex;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+	overflow: hidden;
+	flex-direction: column;
+	color: var(--text-color);
+	padding: 0 30px;
+}
+
+.wiiUIbtn {
+	font-family: inherit;
+	font-size: 30px;
+	letter-spacing: 1px;
+	color: var(--wiiBtn-color);
+	padding: 0.4rem 1rem;
+	border: solid black 2px;
+	border-radius: 20px;
+	background-color: var(--wiiBtn-background-color);
+	cursor: pointer;
+	transition: transform 0.15s;
+}
+
+#RemotePage {
+	-webkit-user-select: none;
+	/* Safari */
+	-ms-user-select: none;
+	/* IE 10 and IE 11 */
+	user-select: none;
+	/* Standard syntax */
+	display: flex;
+	align-items: center;
+	height: 100dvh;
+	margin: 0;
+	overflow: hidden;
+	flex-direction: column;
+	color: var(--text-color);
+}
+#RemotePage remote .bTri.one {
+	display: var(--bBtn-show-left);
+}
+#RemotePage remote .bTri.two {
+	display: var(--bBtn-show-right);	
+}
+
+
+#lights {
+	margin-top: 10px;
+	width: 200px;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+#lights div {
+	width: 15px;
+	aspect-ratio: 1;
+	background-color: var(--light-off);
+}
+#lights div.on {
+	background-color: var(--light-on);
+	box-shadow: 0 0 11px 2px var(--light-on-shadow);
+}
+
+#openFullScreenPrompt {
+	--padding: 15px;
+	display: flex;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: calc(100% - var(--padding) * 2);
+	height: calc(100% - var(--padding) * 2);
+	background-color: rgba(128, 128, 128, 0.8);
+	color: black;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-size: 1.2em;
+	gap: 1rem;
+	cursor: pointer;
+	z-index: 1000;
+	padding: var(--padding);
+}
+body:fullscreen #openFullScreenPrompt,
+html:fullscreen #openFullScreenPrompt {
+	display: none !important;
+}
+
+.top-nav {
+	position: absolute;
+	top: 0;
+	left: 10px;
+	right: 20px;
+	display: flex;
+	justify-content: space-between;
+	font-size: 25px;
+	z-index: 10;
+}
+.top-nav #menuBarsBtn {
+	padding: 10px;
+	background-color: var(--background-color);
+	cursor: pointer;
+}
+.top-nav i {
+	pointer-events: none;
+}
+
+#side-menu {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	justify-content: space-between;
+	font-size: 25px;
+	z-index: 1000;
+	pointer-events: none;
+}
+#side-menu .screen-dimmer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: -1;
+	opacity: 1;
+	pointer-events: all;
+	transition: opacity 0.2s ease;
+}
+#side-menu.closed .screen-dimmer {
+	opacity: 0;
+	pointer-events: none;
+}
+#side-menu .menu-content {
+	background-color: var(--side-panel-background-color);
+	box-shadow: 0 0 12px -5px rgba(0, 0, 0, 0.65);
+	z-index: 1001;
+	display: flex;
+	flex-direction: column;
+	padding: 2rem 0;
+	min-width: 65%;
+	pointer-events: all;
+	overflow: hidden;
+	transform: translateX(0);
+	transition: transform 0.2s ease;
+}
+#side-menu.closed .menu-content {
+	transform: translateX(-100%);
+}
+#side-menu .title {
+	font-size: 1.5rem;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 1rem;
+}
+#side-menu hr {
+	width: 80%;
+	margin: 0 auto;
+}
+#side-menu .menu-btn {
+	font-size: 1.2rem;
+	cursor: pointer;
+	padding: 1rem 1.5rem;
+	position: relative;
+}
+#side-menu .menu-btn i {
+	margin-right: 0.5rem;
+}
+
+#side-menu .menu-btn sub {
+	position: absolute;
+	vertical-align: inherit;
+	font-size: small;
+	opacity: 0.7;
+	left: 60px;
+	bottom: 0;
+}
+
+#side-menu #joinCode {
+	position: absolute;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+    text-align: center;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+
+#scanPopup {
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
+	display: flex;
+	justify-content: center;
+	background: black;
+	color: white;
+}
+#scanPopup .back-btn {
+	position: fixed;
+	top: 30px;
+	left: 30px;
+	font-size: 1.5rem;
+	cursor: pointer;
+}
+#scanPopup .fader {
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 100px;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid rgba(255, 255, 255, 0.5);
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: loader-rotation 1s linear infinite;
+}
+@keyframes loader-rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.loader.centered {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+    animation: loader-rotation-centered 1s linear infinite;
+}
+
+@keyframes loader-rotation-centered {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.player-one-only {
+	pointer-events: none;
+	opacity: 0.2;
+}
+.player-one-only.enabled {
+	pointer-events: all;
+	opacity: 1;
+}
+
+
+/* dark mode! */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--background-color: #141414;
+		--container-border: #000000;
+		--btn-background-color: #262626;
+		--btn-drop-shadow: drop-shadow(0px 0px 4px #000000);
+		--btn-pressed-background-color: #181818;
+		--text-color: #a9a9a9;
+		--light-off: #333333;
+		--light-on: #14ff00;
+		--light-on-shadow: #45ff3d4a;
+		--wiiBtn-background-color: #343434;
+		--wiiBtn-color: #f3f3f3;
+		--side-panel-background-color: black;
+	}
+	.qr-code {
+		filter: invert() brightness(0.8);
+	}
+}
