@@ -177,7 +177,7 @@ button.padding {
     <header>
         <span class="installer-name"><i class="fa-regular fa-id-card"></i></i>&nbsp;&nbsp;<span id="window-title">BeckerBox License Verification</span></span>
         <div class="window-controls">
-            <div class="control-button close" id="window-close-button"><i class="fa-solid fa-xmark"></i></div>
+            <div class="control-button close" id="window-close-button" onclick="window.close()"><i class="fa-solid fa-xmark"></i></div>
         </div>
     </header>
     <main>
@@ -199,12 +199,6 @@ button.padding {
     </footer>
 
         <script>
-document.getElementById('window-close-button').onclick = () => {
-    JSAlert.confirm('Are you sure you want to close this window?', 'Confirm Close', JSAlert.Icons.Warning).then((result) => {
-        if (result)
-            window.close();
-    });
-};
 document.getElementById('page-subtitle').textContent = new URLSearchParams(location.search).get('msg') || '';
 
 let currentlySubmitting = false;
