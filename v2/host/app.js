@@ -15,23 +15,8 @@ import scaleScreenToFit from './scale-screen.js';
 scaleScreenToFit();
 
 
-if (!window.location.host.startsWith('localhost')) {
-    GoogleSignInWithFirebase()
-        .then((result) => {
-            const loginOverlay = document.querySelector('#loginOverlay');
-            if (result) {
-                loginOverlay.classList?.add('loggedIn');
-                PlayerManager.init();
-            } else {
-                loginOverlay.classList?.add('no-access');
-            }
-        })
-        .catch(() => { });
-} else {
-    PlayerManager.init();
-    const loginOverlay = document.querySelector('#loginOverlay');
-    loginOverlay.classList?.add('loggedIn');
-}
+window.electron?.init();
+PlayerManager.init();
 
 
 window.PlayerManager = PlayerManager;
